@@ -8,8 +8,10 @@ const billingApi = require("./api/billing")
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
+
   type Query {
     users: [ User ],
+    user(id: Int!): User
   }
 
   type User {
@@ -37,28 +39,37 @@ const typeDefs = gql`
 const resolvers = {
   // the root queries
   Query: {
-    users: (obj, args, context, info) => {
-      console.log(obj)
+    users: (parent, args, context, info) => {
+      console.log("user parent:", parent)
+      console.log("uer args:", args)
+
       return usersApi.getUsers()
-    }
-  }, 
+    },
+
+    user: (parent, { id }) => {
+      console.log(parent)
+      // console.log(args)
+      return usersApi.getUsers().then(users => users.find(u => u.id === id ))
+    }, 
+  },
 
   User: {
-    terminals: (obj, args, context, info) => {
-      console.log(obj)
+    terminals: (parent, args, context, info) => {
+      console.log("terminals parent:", parent)
+      console.log("terminals args:", args)
 
       return terminalsApi.getTerminals().then(data => {
-        return data.filter(t => t.user_id === obj.id)
+        return data.filter(t => t.user_id === parent.id)
       })
     }
   },
 
   Terminal: {
-    invoices: (obj, args, context, info) => { 
-      console.log(obj)
+    invoices: (parent, args, context, info) => { 
+      console.log(parent)
 
       return billingApi.getInvoices().then(data => {
-        return data.filter(i => i.terminal_id === obj.id)
+        return data.filter(i => i.terminal_id === parent.id)
       })
     }
   }
