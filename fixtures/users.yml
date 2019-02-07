@@ -1,0 +1,68 @@
+users:
+  - 
+   id: 1
+   name: fulano
+   email: fulano@teste.com.br
+  - 
+   id: 2
+   name: ciclano
+   email: ciclano@teste.com.br
+
+  - 
+   id: 3
+   name: zé das couves
+   email: ze.couves@teste.com.br
+
+
+terminals:
+  - 
+    id: 93847184039
+    user_id: 1
+  - 
+    id: 93847184055
+    user_id: 1
+
+  - 
+    id: 9872344859
+    user_id: 2
+
+
+  - 
+    id: 83817234838
+    user_id: 3
+
+  - 
+    id: 88873726374
+    user_id: 3
+
+
+invoices:
+  -
+    terminal_id: 93847184039
+    date: '2019-01-21'
+    value: 10.0
+    paid: false
+
+  -
+    terminal_id: 93847184055
+    date: '2019-01-21'
+    value: 10.0
+    paid: false
+
+  -
+    terminal_id: 9872344859
+    date: '2019-01-21'
+    value: 10.0
+    paid: false
+
+  -
+    terminal_id: 83817234838
+    date: '2019-01-21'
+    value: 10.0
+    paid: false
+
+  -
+    terminal_id: 88873726374
+    date: '2019-01-21'
+    value: 10.0
+    paid: false

@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+
+  graphql:
+    build: ./graphql/.
+    environment:
+      - PORT=4000
+      - 'USERS_API_URL=http://users:4050'
+      - 'TERMINALS_API_URL=http://terminals:3500'
+      - 'BILLING_API_URL=http://billing:3000'
+    ports: 
+      - 4000:4000
+
+  terminals:
+    build: ./terminals/.
+    environment:
+      - PORT=3500
+    ports: 
+      - 3500:3500
+    volumes:
+      - ./fixtures/users.yml:/app/data.yml
+
+  billing:
+    build: ./billings/.
+    environment:
+      - PORT=3000
+    ports: 
+      - 3000:3000
+    volumes:
+      - ./fixtures/users.yml:/app/data.yml
+
+  users:
+    build: ./users/.
+    environment:
+      - PORT=4050
+    ports: 
+      - 4050:4050
+    volumes:
+      - ./fixtures/users.yml:/app/data.yml
+
+
